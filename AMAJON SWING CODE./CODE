@@ -1,0 +1,163 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+class Login extends JFrame implements ActionListener {
+    JLabel l1, l2;
+    JTextField tf1;
+    JPasswordField pf1;
+    JButton b1;
+
+    Login() {
+        setTitle("Login Form");
+        setSize(300, 150);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new GridLayout(3, 2));
+
+        l1 = new JLabel("Username:");
+        add(l1);
+
+        tf1 = new JTextField();
+        add(tf1);
+
+        l2 = new JLabel("Password:");
+        add(l2);
+
+        pf1 = new JPasswordField();
+        add(pf1);
+
+        b1 = new JButton("Login");
+        b1.addActionListener(this);
+        add(b1);
+
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        String uname = tf1.getText();
+        String pass = new String(pf1.getPassword());
+        if (uname.equals("amajon") && pass.equals("amrita")) {
+            JOptionPane.showMessageDialog(this, "Login Successful");
+            dispose();
+            new Shopping();
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid Username or Password");
+        }
+    }
+
+    public static void main(String[] args) {
+        new Login();
+    }
+}
+
+class Shopping extends JFrame implements ActionListener {
+    JButton[] items;
+    JButton addToCartBtn;
+    JButton viewCartBtn;
+    JButton payBtn;
+    JTextArea cartArea;
+    double totalAmount;
+    String[] itemNames = {"Asus Rog 3", "HP VICTUS", "LENOVO LEGION", "MILTON FLASK", "REALME 6", "IPHONE", "SAMSUNG", "SHADES", "AIRBUDS", "COOLER"};
+    double[] itemPrices = {20000.0, 17500.0, 130000.0, 78000.0, 60000.0, 150000.0, 80000.0, 90000.0, 1200.0, 12000.0};
+    boolean[] itemAdded;
+
+    Shopping() {
+        setTitle("AMAJON");
+        setSize(400, 400);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+
+
+        JPanel itemListPanel = new JPanel(new GridLayout(5, 2));
+        items = new JButton[10];
+        itemAdded = new boolean[10];
+        for (int i = 0; i < 10; i++) {
+            items[i] = new JButton(itemNames[i] + " - $" + itemPrices[i]);
+            items[i].addActionListener(this);
+            itemListPanel.add(items[i]);
+        }
+
+        JPanel controlPanel = new JPanel(new FlowLayout());
+        addToCartBtn = new JButton("Add to Cart");
+        addToCartBtn.addActionListener(this);
+        viewCartBtn = new JButton("View Cart");
+        viewCartBtn.addActionListener(this);
+        payBtn = new JButton("Pay");
+        payBtn.addActionListener(this);
+        controlPanel.add(addToCartBtn);
+        controlPanel.add(viewCartBtn);
+        controlPanel.add(payBtn);
+
+        cartArea = new JTextArea();
+        cartArea.setEditable(false);
+
+        add(itemListPanel, BorderLayout.CENTER);
+        add(controlPanel, BorderLayout.SOUTH);
+        add(new JScrollPane(cartArea), BorderLayout.EAST);
+
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+        if (source instanceof JButton) {
+            JButton button = (JButton) source;
+            if (button.equals(addToCartBtn)) {
+                StringBuilder cartContent = new StringBuilder();
+                totalAmount = 0.0;
+                for (int i = 0; i < 10; i++) {
+                    if (itemAdded[i]) {
+                        cartContent.append(itemNames[i]).append(" - $").append(itemPrices[i]).append("\n");
+                        totalAmount += itemPrices[i];
+                    }
+                }
+                cartArea.setText(cartContent.toString());
+                cartArea.append("\nTotal Amount: $" + totalAmount);
+            } else if (button.equals(viewCartBtn)) {
+                StringBuilder cartContent = new StringBuilder();
+                for (int i = 0; i < 10; i++) {
+                    if (itemAdded[i]) {
+                        cartContent.append(itemNames[i]).append(" - $").append(itemPrices[i]).append("\n");
+                    }
+                }
+                JOptionPane.showMessageDialog(this, "Cart Items:\n" + cartContent.toString());
+            } else if (button.equals(payBtn)) {
+                if (totalAmount > 0) {
+                    generateBill(); // Call method to generate the bill
+                    JOptionPane.showMessageDialog(this, "Payment successful! Thank you for shopping with us.");
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Your cart is empty. Please add items to the cart before making payment.");
+                }
+            } else {
+                for (int i = 0; i < 10; i++) {
+                    if (button.equals(items[i])) {
+                        itemAdded[i] = !itemAdded[i];
+                        if (itemAdded[i]) {
+                            button.setBackground(Color.GREEN);
+                        } else {
+                            button.setBackground(null);
+                        }
+                        break;}
+                }
+            }
+        }
+    }
+
+    private void generateBill() {
+        StringBuilder bill = new StringBuilder();
+        bill.append("Bill Details:\n");
+        for (int i = 0; i < 10; i++) {
+            if (itemAdded[i]) {
+                bill.append(itemNames[i]).append(" - $").append(itemPrices[i]).append("\n");
+            }
+        }
+        bill.append("\nTotal Amount: $").append(totalAmount);
+        JOptionPane.showMessageDialog(this, bill.toString(), "Purchase Bill", JOptionPane.PLAIN_MESSAGE);
+    }
+
+    public static void main(String[] args) {
+        new Shopping();
+    }
+}
