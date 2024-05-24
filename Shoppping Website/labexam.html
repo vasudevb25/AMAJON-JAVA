@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body{
+            background-color: aqua;
+        }
+        .table,th,tr,td{
+            padding: 5px;
+            border:solid 2px;
+            border:collapse;
+        }
+        .wrapper{
+            background: transparent;
+            text-align: center;
+            position: relative;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper" onsubmit="return validateForm()">
+        <h1 id="Login">Login</h1>
+        <form>
+            <label for="name" id="name" >Name</label>
+            <input type="text" id="username" placeholder="username" required>
+            <label for="password" id="password"></label>
+            <input type="password" id="password" placeholder="Password" required>
+
+        </form>
+        <button id="btn" onclick="validateForm()">Login</button>
+    </div>
+    <script>5
+        function validateForm(){
+            const user =document.getElementById("username").value;
+            const pass=document.getElementById("password").value;
+            if (user === "" || pass === ""){
+                window.alert("Enter values");
+            }
+            else if(user==="hi"){
+                alert("login")
+                window.location.href="dash.html";
+                return true;
+            }
+
+        }
+    </script>
+    
+    <table>
+        <th>
+            <td>hi</td>
+            <td>hi</td>
+        </th>
+       
+        <tr>
+            <td rowspan="1">yo</td>
+            <td>yo</td>
+        </tr>
+        <tr>
+            <td>yo</td>
+            <td>yo</td>
+        </tr>
+    </table>
+    <iframe >
+
+    </iframe>
+</body>
+</html>

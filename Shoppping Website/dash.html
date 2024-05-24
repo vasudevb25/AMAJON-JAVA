@@ -1,0 +1,121 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        body{
+            background-color: aliceblue;
+        
+
+        }
+        .red{
+            display:flex;
+        }
+    </style>
+    <h1>yoooooooooooooooooooooo</h1>
+    <button id="red" style="color: red;"onclick="validateForm1()">red</button>
+    <button id="red" style="color: rgb(51, 10, 197);"onclick="validateForm2()">blue</button>
+    <button id="red" style="color: rgb(18, 225, 53);"onclick="validateForm3()">green</button>
+    <script>
+        function validateForm1(){
+            document.body.style.backgroundColor="red";
+            
+        }
+        function validateForm2(){
+            document.body.style.backgroundColor="blue";
+            
+        }
+        function validateForm3(){
+            document.body.style.backgroundColor="green";
+            
+        }
+    </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Switcher with Fieldset</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.image-switcher {
+    background-color: #fff;
+    padding: 20px;
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+legend {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0 10px;
+    color: #007BFF;
+}
+
+img {
+    display: block;
+    margin: 20px auto;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 600px) {
+    img {
+        width: 100px;
+        height: auto;
+    }
+
+    button {
+        width: 100%;
+        padding: 15px;
+        font-size: 18px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <fieldset class="image-switcher">
+        <legend>Switch Image</legend>
+        <img id="image" src="smiley.gif" width="160" height="120" alt="Smiley Face">
+        <button onclick="validateForm()">Click</button>
+    </fieldset>
+
+    <script>
+        function validateForm() {
+            document.getElementById("image").src = "landscape.jpg";
+        }
+    </script>
+</body>
+</html>
